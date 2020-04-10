@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
-export class todoItem {
+export class TodoItem {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
