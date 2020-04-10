@@ -1,21 +1,21 @@
 export const addEvent = () => {
-    //something
+  // something
 };
 
 export const deleteEvent = () => {
-    //something
+  // something
 };
 
 export const assignProject = () => {
-    //something
+  // something
 };
 
 export const createProject = () => {
-    //something
+  // something
 };
 
 export const changePriority = () => {
-    //something
+  // something
 };
 
-//localStorage.setItem("lastname", "Smith");
+// localStorage.setItem("lastname", "Smith");
