@@ -8,14 +8,12 @@ const favProject = () => {
 const Project = function (projectName) {
     const project = {};
     project.projectName = projectName;
-    project.projectPreference = function (projectPreference) {
+    project.projectPreference = (projectPreference) => {
         switch(projectPreference) {
             case 1:
                 return favProject();
-                break;
             case 2:
                 return 'So boring!';
-                break;
         }
     };
     return project;
