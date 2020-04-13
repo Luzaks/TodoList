@@ -9,34 +9,6 @@ const createClickBlock = () => {
   clickblock.classList.add('clickBlock', 'hidden');
   clickblock.id = 'clickBlock';
 
-  const projectCard = document.createElement('div');
-  projectCard.classList.add('card');
-  projectCard.id = 'projectCard';
-  clickblock.appendChild(projectCard);
-  const projCardBody = document.createElement('div');
-  projCardBody.classList.add('card-body', 'flex-column');
-  projectCard.appendChild(projCardBody);
-  const projCardTitle = document.createElement('h6');
-  projCardTitle.classList.add('card-title');
-  projCardTitle.innerHTML = 'Add a Project';
-  projCardBody.appendChild(projCardTitle);
-  const projInputname = document.createElement('input');
-  projInputname.classList.add('float-right');
-  projInputname.type = 'text';
-  projInputname.name = 'name';
-  projInputname.id = 'projectName';
-  projInputname.defaultValue = 'My New Project';
-  projCardBody.appendChild(projInputname);
-  const label1 = document.createElement('label');
-  label1.for = 'projectName';
-  label1.innerHTML = 'Name';
-  projCardBody.appendChild(label1);
-  const createProjectButton = document.createElement('button');
-  createProjectButton.classList.add('btn', 'btn-info', 'btn-sm', 'float-right');
-  createProjectButton.innerHTML = 'Create';
-  createProjectButton.addEventListener('click', events.createProject.bind(this), false);
-  projCardBody.appendChild(createProjectButton);
-
   return clickblock;
 };
 

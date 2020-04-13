@@ -18,7 +18,7 @@ export const initializeStorage = () => {
   }
 };
 
-export const createProjectListItems = () => {
+export const createProjectListItems = (keepOpen) => {
   const itemlist = document.getElementById('projectsContainer');
   let itemlistInfo = '';
   currentProjects.forEach(proj => {
@@ -32,6 +32,10 @@ export const createProjectListItems = () => {
   Array.prototype.forEach.call(projectItems, (element) => {
     element.addEventListener('click', events.selectProject.bind(this, element.id), false);
   });
+
+  if (keepOpen === true) {
+    events.selectProject(events.currentProject);
+  }
 };
 
 export const createTaskListContents = () => {
@@ -43,7 +47,7 @@ export const createTaskListContents = () => {
       }
     });
     const contentInfo = ` 
-    <h5>${selectedID.name} <img class="add-img2 deleteimgT" alt="add-icon" src="${edit}" /> <img class="add-img deleteimgT" id="deleteProjectButton" alt="add-icon" src="${deleteButton}" /></h5>
+    <h5>${selectedID.name} <img class="add-img2 deleteimgT" id="openEditProject" alt="add-icon" src="${edit}" /> <img class="add-img deleteimgT" id="deleteProjectButton" alt="add-icon" src="${deleteButton}" /></h5>
             
     <div class="d-flex projectActivity justify-content-end">
         <p class="listProjectsH2">
@@ -54,6 +58,7 @@ export const createTaskListContents = () => {
     <hr />`;
     document.getElementById('projectInfoContainer').innerHTML = contentInfo;
     document.getElementById('deleteProjectButton').addEventListener('click', events.deleteProject.bind(this), false);
+    document.getElementById('openEditProject').addEventListener('click', events.openEditProject.bind(this), false);
   }
   else {
     document.getElementById('projectInfoContainer').innerHTML = 'Welcome! please select or create a project to start adding tasks!';
@@ -67,7 +72,7 @@ export const removeProject = (id) => {
     }
   });
   localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
-  createProjectListItems();
+  createProjectListItems(false);
   createTaskListContents();
 };
 
@@ -78,6 +83,17 @@ export const createProject = (name) => {
       : Math.max(...currentProjects.map((proj) => proj.id)) + 1, name, []);
     currentProjects.push(item);
     localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
-    createProjectListItems();
+    createProjectListItems(false);
   }
+};
+
+export const updateProject = (id, value) => {
+  currentProjects.forEach(elem => {
+    if (elem.id === id) {
+      elem.name = value;
+    }
+  });
+  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  createProjectListItems(true);
+  createTaskListContents();
 };

@@ -5,12 +5,4 @@ export class TodoList {
     this.name = name;
     this.members = members;
   }
-
-  static addMember(member) {
-    this.members.push(member);
-  }
-
-  static changeName(newName) {
-    this.name = newName;
-  }
 }

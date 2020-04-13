@@ -7,14 +7,34 @@ export let currentProject;
 const closeModals = () => {
   const clickBlocker = document.getElementById('clickBlock');
   clickBlocker.classList.add('hidden');
-  const cards = document.getElementsByClassName('card');
-  Array.prototype.forEach.call(cards, (element) => {
-    element.classList.add('hidden');
-  });
 };
 
-export const editProject = (id) => {
-  
+const editProject = (element) => {
+  const val = document.getElementById('projectName');
+  closeModals();
+  localStorage.updateProject(element, val.value);
+};
+
+export const openEditProject = () => {
+  const clickBlocker = document.getElementById('clickBlock');
+  let selectedID;
+  clickBlocker.classList.remove('hidden');
+  localStorage.currentProjects.forEach(elem => {
+    if (`projectItem${elem.id}` === currentProject) {
+      selectedID = elem;
+    }
+  });
+  clickBlocker.innerHTML = `
+  <div class="card">
+        <div class="card-body flex-column">
+            <h6 class="card-title">Edit project</h6>
+            <input type="text" name="name" id="projectName" value="${selectedID.name}" class="float-right">
+            <label for="name">Name</label>
+            <button type="button" id="actionButton" class="btn btn-info btn-sm float-right">Edit</button>
+          </div>
+    </div>
+  `;
+  document.getElementById('actionButton').addEventListener('click', editProject.bind(this, selectedID.id), false);
 };
 
 export const selectProject = (id) => {
@@ -59,9 +79,16 @@ export const changePriority = () => {
 export const openCreateProject = () => {
   const clickBlocker = document.getElementById('clickBlock');
   clickBlocker.classList.remove('hidden');
-  const cards = document.getElementsByClassName('card');
-  Array.prototype.forEach.call(cards, (element) => {
-    // eslint-disable-next-line no-unused-expressions
-    element.id === 'projectCard' ? element.classList.remove('hidden') : element.classList.add('hidden');
-  });
+
+  clickBlocker.innerHTML = `
+  <div class="card">
+        <div class="card-body flex-column">
+            <h6 class="card-title">Add a Project</h6>
+            <input type="text" name="name" id="projectName" value="My new project" class="float-right">
+            <label for="name">Name</label>
+            <button type="button" id="actionButton" class="btn btn-info btn-sm float-right">Create</button>
+          </div>
+    </div>
+  `;
+  document.getElementById('actionButton').addEventListener('click', createProject.bind(this), false);
 };
