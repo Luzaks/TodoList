@@ -18,4 +18,8 @@ export const changePriority = () => {
   // something
 };
 
+export const openCreateProject = () => {
+  console.log('working');
+};
+
 // localStorage.setItem("lastname", "Smith");
