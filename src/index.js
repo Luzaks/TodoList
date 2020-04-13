@@ -1,14 +1,41 @@
-import './CSS/main.css';
 import './CSS/bootstrap.css';
+import './CSS/main.css';
 import add from './assets/add.png';
 import * as events from './events';
 import * as localStorage from './localStorage';
 
 const createClickBlock = () => {
   const clickblock = document.createElement('div');
-  clickblock.classList.add('clickBlock');
+  clickblock.classList.add('clickBlock', 'hidden');
+  clickblock.id = 'clickBlock';
 
   const projectCard = document.createElement('div');
+  projectCard.classList.add('card');
+  projectCard.id = 'projectCard';
+  clickblock.appendChild(projectCard);
+  const projCardBody = document.createElement('div');
+  projCardBody.classList.add('card-body', 'flex-column');
+  projectCard.appendChild(projCardBody);
+  const projCardTitle = document.createElement('h6');
+  projCardTitle.classList.add('card-title');
+  projCardTitle.innerHTML = 'Add a Project';
+  projCardBody.appendChild(projCardTitle);
+  const projInputname = document.createElement('input');
+  projInputname.classList.add('float-right');
+  projInputname.type = 'text';
+  projInputname.name = 'name';
+  projInputname.id = 'projectName';
+  projInputname.defaultValue = 'My New Project';
+  projCardBody.appendChild(projInputname);
+  const label1 = document.createElement('label');
+  label1.for = 'projectName';
+  label1.innerHTML = 'Name';
+  projCardBody.appendChild(label1);
+  const createProjectButton = document.createElement('button');
+  createProjectButton.classList.add('btn', 'btn-info', 'btn-sm', 'float-right');
+  createProjectButton.innerHTML = 'Create';
+  createProjectButton.addEventListener('click', events.createProject.bind(this), false);
+  projCardBody.appendChild(createProjectButton);
 
   return clickblock;
 };
@@ -54,15 +81,18 @@ const createMain = () => {
   title.appendChild(addbutton);
   const list = document.createElement('ul');
   list.classList.add('projectsContainer');
+  list.id = 'projectsContainer';
   menuAside.appendChild(list);
 
-  localStorage.currentProjects.forEach(project => {
-    const proj = localStorage.createProjectListItem(project.name);
-    list.appendChild(proj);
-  });
+  const projectInfoContainer = document.createElement('section');
+  projectInfoContainer.classList.add('todoItemSection', 'flex-column', 'col-xl-9', 'col-l-9', 'col-md-9', 'd-flex');
+  projectInfoContainer.id = 'projectInfoContainer';
+  projectInfoContainer.innerHTML = 'Welcome! please select or create a project to start adding tasks!';
+  element.appendChild(projectInfoContainer);
 
   return element;
 };
 
 localStorage.initializeStorage();
 document.body.appendChild(createMain());
+localStorage.createProjectListItems();

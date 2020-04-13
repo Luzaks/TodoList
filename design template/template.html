@@ -10,10 +10,11 @@
 </head>
 
 <body>
-    <div class="clickBlock"><div class="card">
+    <div class="clickBlock">
+    <div class="card">
         <div class="card-body flex-column hidden">
             <h6 class="card-title">Add a project</h6>
-            <input type="name" class="float-right">
+            <input type="text" name="name" id="projectName" class="float-right">
             <label for="name">Name</label>
             <button type="button" class="btn btn-info btn-sm float-right">Create</button>
           </div>
@@ -34,7 +35,8 @@
             <textarea name="description" placeholder="Write a description here is needed"></textarea>
             <button type="button" class="btn btn-info btn-sm float-bt">Create</button>
           </div>
-    </div></div>
+    </div>
+    </div>
     
     <header class="headerContainer d-flex justify-content-between align-items-center">
         <div
@@ -59,7 +61,7 @@
                 </h2>
                 <img class="add-img" alt="add-icon" src="../src/assets/icons8-add-24.png" />
             </div>
-            <ul class="projectsContainer">
+            <ul class="projectsContainer" id="projectsContainer">
                 <li class="projectItemContainer">
                     <div class="projectItem">Project Item Two</div>
                 </li>
@@ -68,7 +70,7 @@
                 </li>
             </ul>
         </aside>
-        <section class="todoItemSection flex-column col-xl-9 col-l-9 col-md-9 d-flex">
+        <section class="todoItemSection flex-column col-xl-9 col-l-9 col-md-9 d-flex" id="projectInfoContainer">
             <h5>Title Project <img class="add-img2 deleteimgT" alt="add-icon" src="../src/assets/edit.png" /> <img class="add-img deleteimgT" alt="add-icon" src="../src/assets/delete.png" /></h5>
             
             <div class="d-flex projectActivity justify-content-end">
