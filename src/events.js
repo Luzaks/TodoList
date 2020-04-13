@@ -82,11 +82,11 @@ export const openAddTaskWindow = () => {
       <input type="text" id="taskName" name="name" value="Title" class="float-right">
       <label for="name">Name</label>
       <input type="date" id="taskDate" name="date" value="2020-01-01" class="float-right">
-      <label for="date">Date</label>
+      <label for="date">Due Date</label>
       <select id="priority" class="float-right" name="priority">
-          <option value="high">High</option>
-          <option value="normal">Normal</option>
-          <option value="low">Low</option>
+          <option value="High">High</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
       </select>
       <label for="priority">Priority</label>
       <textarea name="description" id="descriptionTask" placeholder="Write a description here is needed"></textarea>
@@ -111,9 +111,6 @@ export const deleteProject = () => {
   localStorage.removeProject(projectToDelete);
 };
 
-export const changePriority = () => {
-  // something
-};
 
 export const openCreateProject = () => {
   const clickBlocker = document.getElementById('clickBlock');
@@ -130,4 +127,55 @@ export const openCreateProject = () => {
     </div>
   `;
   document.getElementById('actionButton').addEventListener('click', createProject.bind(this), false);
+};
+
+export const openEditTask = (id) =>{
+  let taskParent;
+  let task;
+  localStorage.currentProjects.forEach(elem => {
+    if (`projectItem${elem.id}` === currentProject) {
+      taskParent = elem;
+      elem.members.forEach(element => {
+        if (`editTaskB${element.id}` === id) {
+          task = element;
+        }
+      });
+    }
+  });
+
+
+  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker.classList.remove('hidden');
+  clickBlocker.innerHTML = `
+  <div class="card createTask">
+  <div class="card-body flex-column">
+      <h6 class="card-title">Task Details</h6>
+      <input type="text" id="taskName" name="name" value="${task.title}" class="float-right">
+      <label for="name">Name</label>
+      <input type="date" id="taskDate" name="date" value="${task.dueDate.toString()}" class="float-right">
+      <label for="date">Due Date</label>
+      <select id="priority" class="float-right" name="priority">
+          <option value="High">High</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
+          <option value="Finished" selected="selected">Finished</option>
+      </select>
+      <label for="priority">Priority</label>
+      <textarea name="description" id="descriptionTask">${task.description}</textarea>
+      <button type="button" id="editTaskButtonAction" class="btn btn-info btn-sm float-bt">Submit</button>
+    </div>
+  </div>
+  `;
+
+  document.getElementById('editTaskButtonAction').addEventListener('click', confirmTaskEdit.bind(this, task, taskParent));
+};
+
+const confirmTaskEdit = (element, parent) => {
+  const taskTitle = document.getElementById('taskName').value;
+  const taskDate = document.getElementById('taskDate').value;
+  const taskPrio = document.getElementById('priority').value;
+  const description = document.getElementById('descriptionTask').value;
+
+  closeModals();
+  localStorage.editTask(element, parent, taskTitle, description, taskDate, taskPrio);
 };

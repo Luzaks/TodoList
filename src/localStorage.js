@@ -39,9 +39,21 @@ export const createProjectListItems = (keepOpen) => {
   }
 };
 
+const getMessage = (prio, date) => {
+  let val = '';
+  if (prio === 'Finished') {
+    val = '';
+  } else {
+    val = `<span class="float-right marg"> This task should be done by ${date}</span>`;
+  }
+  return val;
+};
+
 export const createTaskListContents = () => {
   let selectedID;
   let contentTaskInfo = '';
+  let message= '';
+
   if (events.currentProject !== null) {
     currentProjects.forEach(elem => {
       if (`projectItem${elem.id}` === events.currentProject) {
@@ -51,8 +63,8 @@ export const createTaskListContents = () => {
     if (selectedID.members.length > 0) {
       selectedID.members.forEach(elem => {
         contentTaskInfo += `<div>
-            <h6>${elem.title} <img class="add-img2 deleteimgT" alt="add-icon" src="${edit}" /></h6>
-            <p class="details">${elem.priority} <span>priority</span> <span>${elem.dueDate.toString()}</span></p>
+            <h6>${elem.title} <img class="add-img2 deleteimgT" name="editTaskB" id="editTaskB${elem.id}" alt="add-icon" src="${edit}" /></h6>
+            <p class="details"><span>Priority: </span> ${elem.priority} ${getMessage(elem.priority, elem.dueDate)}</p>
             <small>${elem.description}</small>
 
             <img class="add-img float-right deleteimg" name="deleteProjectTask" id="deleteProjectTask${elem.id}" alt="add-icon" src="${deleteButton}" />
@@ -81,6 +93,10 @@ export const createTaskListContents = () => {
     const buttons = document.getElementsByName('deleteProjectTask');
     Array.prototype.forEach.call(buttons, (element) => {
       element.addEventListener('click', events.deleteTask.bind(this, element.id), false);
+    });
+    const buttonsEdit = document.getElementsByName('editTaskB');
+    Array.prototype.forEach.call(buttonsEdit, (element) => {
+      element.addEventListener('click', events.openEditTask.bind(this, element.id), false);
     });
   } else {
     document.getElementById('projectInfoContainer').innerHTML = 'Welcome! please select or create a project to start adding tasks!';
@@ -156,3 +172,22 @@ export const deleteTask = (idproj, iditem) => {
   createProjectListItems(true);
   createTaskListContents();
 };
+
+export const editTask = (task, parent, taskTitle, description, taskDate, taskPrio) => {
+  currentProjects.forEach(elem => {
+    if (elem === parent) {
+      elem.members.forEach(_item => {
+        if (_item === task) {
+          _item.title = taskTitle;
+          _item.description = description;
+          _item.dueDate = taskDate;
+          _item.priority = taskPrio;
+        }
+      });
+    }
+  });
+
+  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  createProjectListItems(true);
+  createTaskListContents();
+}
