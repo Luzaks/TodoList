@@ -10,6 +10,32 @@
 </head>
 
 <body>
+    <div class="clickBlock"><div class="card">
+        <div class="card-body flex-column hidden">
+            <h6 class="card-title">Add a project</h6>
+            <input type="name" class="float-right">
+            <label for="name">Name</label>
+            <button type="button" class="btn btn-info btn-sm float-right">Create</button>
+          </div>
+    </div>
+    <div class="card createTask">
+        <div class="card-body flex-column">
+            <h6 class="card-title">Add a Task</h6>
+            <input type="text" name="name" class="float-right">
+            <label for="name">Name</label>
+            <input type="date" name="date" class="float-right">
+            <label for="date">Date</label>
+            <select id="priority" class="float-right" name="priority">
+                <option value="high">High</option>
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+            </select>
+            <label for="priority">Priority</label>
+            <textarea name="description" placeholder="Write a description here is needed"></textarea>
+            <button type="button" class="btn btn-info btn-sm float-bt">Create</button>
+          </div>
+    </div></div>
+    
     <header class="headerContainer d-flex justify-content-between align-items-center">
         <div
             class="h1HeaderContainer col-lg-4 col-xl-3 col-md-4 col-sm-7 col-10 d-flex align-items-center justify-content-end">

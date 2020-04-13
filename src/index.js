@@ -2,6 +2,16 @@ import './CSS/main.css';
 import './CSS/bootstrap.css';
 import add from './assets/add.png';
 import * as events from './events';
+import * as localStorage from './localStorage';
+
+const createClickBlock = () => {
+  const clickblock = document.createElement('div');
+  clickblock.classList.add('clickBlock');
+
+  const projectCard = document.createElement('div');
+
+  return clickblock;
+};
 
 const createHeader = () => {
   const element = document.createElement('header');
@@ -22,7 +32,9 @@ const createHeader = () => {
 };
 
 const createMain = () => {
+  document.body.appendChild(createClickBlock());
   document.body.appendChild(createHeader());
+
   const element = document.createElement('main');
   element.classList.add('mainTag', 'd-flex');
   const menuAside = document.createElement('aside');
@@ -40,8 +52,17 @@ const createMain = () => {
   addbutton.src = add;
   addbutton.addEventListener('click', events.openCreateProject.bind(this), false);
   title.appendChild(addbutton);
+  const list = document.createElement('ul');
+  list.classList.add('projectsContainer');
+  menuAside.appendChild(list);
+
+  localStorage.currentProjects.forEach(project => {
+    const proj = localStorage.createProjectListItem(project.name);
+    list.appendChild(proj);
+  });
 
   return element;
 };
 
+localStorage.initializeStorage();
 document.body.appendChild(createMain());

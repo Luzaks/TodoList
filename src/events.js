@@ -19,7 +19,7 @@ export const changePriority = () => {
 };
 
 export const openCreateProject = () => {
-  console.log('working');
+  
 };
 
 // localStorage.setItem("lastname", "Smith");
