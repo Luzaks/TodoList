@@ -430,10 +430,4 @@ html {
 .createTask {
   height: 320px;
 }
-
-.selectedItem {
-  width: 87%;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(255, 201, 85, 0.9);
-}
 /*# sourceMappingURL=templates.css.map */

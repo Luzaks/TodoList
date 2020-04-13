@@ -328,7 +328,3 @@ html {
   height: 320px;
 }
 
-.selectedItem {
-  @include projectItemHover;
-  border-bottom: 1px solid rgba(255, 201, 85, 0.9);
-}

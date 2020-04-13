@@ -47,23 +47,62 @@ export const selectProject = (id) => {
   });
 };
 
-export const addEvent = () => {
-  // something
+export const addTask = () => {
+  let selectedID;
+  localStorage.currentProjects.forEach(elem => {
+    if (`projectItem${elem.id}` === currentProject) {
+      selectedID = elem;
+    }
+  });
+  const name = document.getElementById('taskName').value;
+  const description = document.getElementById('descriptionTask').value;
+  const date = document.getElementById('taskDate').value;
+  const priority = document.getElementById('priority').value;
+
+  closeModals();
+  localStorage.addTaskToObject(selectedID, name, description, date, priority);
 };
 
-export const deleteEvent = () => {
-  // something
+export const deleteTask = (id) => {
+  console.log(id);
+  localStorage.currentProjects.forEach(elem => {
+    if (`projectItem${elem.id}` === currentProject) {
+      localStorage.deleteTask(elem, id);
+    }
+  });
 };
 
-export const assignProject = () => {
-  // something
+export const openAddTaskWindow = () => {
+  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker.classList.remove('hidden');
+  clickBlocker.innerHTML = `
+  <div class="card createTask">
+  <div class="card-body flex-column">
+      <h6 class="card-title">Add a Task</h6>
+      <input type="text" id="taskName" name="name" value="Title" class="float-right">
+      <label for="name">Name</label>
+      <input type="date" id="taskDate" name="date" value="2020-01-01" class="float-right">
+      <label for="date">Date</label>
+      <select id="priority" class="float-right" name="priority">
+          <option value="high">High</option>
+          <option value="normal">Normal</option>
+          <option value="low">Low</option>
+      </select>
+      <label for="priority">Priority</label>
+      <textarea name="description" id="descriptionTask" placeholder="Write a description here is needed"></textarea>
+      <button type="button" id="createTaskButtonAction" class="btn btn-info btn-sm float-bt">Create</button>
+    </div>
+  </div>
+  `;
+
+  document.getElementById('createTaskButtonAction').addEventListener('click', addTask.bind(this), false);
 };
 
 export const createProject = () => {
   const val = document.getElementById('projectName');
+  closeModals();
   localStorage.createProject(val.value);
   val.value = '';
-  closeModals();
 };
 
 export const deleteProject = () => {
