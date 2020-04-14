@@ -19,6 +19,10 @@ const closeModals = () => {
   clickBlocker = getElem('clickBlock').classList.add('hidden');
 };
 
+const popUp = () => {
+  clickBlocker.classList.remove('hidden');
+};
+
 const editProject = (element) => {
   const val = getElem('projectName');
   closeModals();
@@ -28,7 +32,7 @@ const editProject = (element) => {
 export const openEditProject = () => {
   clickBlocker = getElem('clickBlock');
   let selectedID;
-  clickBlocker.classList.remove('hidden');
+  popUp();
   localStorage.currentProjects.forEach(elem => {
     if (`projectItem${elem.id}` === currentProject) {
       selectedID = elem;
@@ -83,7 +87,7 @@ export const deleteTask = (id) => {
 
 export const openAddTaskWindow = () => {
   clickBlocker = getElem('clickBlock');
-  clickBlocker.classList.remove('hidden');
+  popUp();
   clickBlocker.innerHTML = `
   <div class="card createTask">
   <div class="card-body flex-column">
@@ -123,7 +127,7 @@ export const deleteProject = () => {
 
 export const openCreateProject = () => {
   clickBlocker = getElem('clickBlock');
-  clickBlocker.classList.remove('hidden');
+  popUp();
 
   clickBlocker.innerHTML = `
   <div class="card">
@@ -154,7 +158,7 @@ export const openEditTask = (id) =>{
 
 
   clickBlocker = getElem('clickBlock');
-  clickBlocker.classList.remove('hidden');
+  popUp();
   clickBlocker.innerHTML = `
   <div class="card createTask">
   <div class="card-body flex-column">
