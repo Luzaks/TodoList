@@ -54,7 +54,6 @@ html {
   animation: beating 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
 }
 .headerContainer .navHeaderContent .add-header-img:hover {
-  background-color: #ED2C59;
   animation: trembling ease-in-out 400ms infinite;
   cursor: pointer;
   transform: scale(1.3);
@@ -81,11 +80,9 @@ html {
   background-color: transparent;
 }
 .mainTag .menuAside .projectActivity .add-img:hover {
-  background-color: #ED2C59;
   animation: trembling ease-in-out 400ms infinite;
   cursor: pointer;
   transform: scale(1.3);
-  background-color: rgba(255, 201, 85, 0.9);
 }
 .mainTag .menuAside .favoriteProjectsH2,
 .mainTag .menuAside .listProjectsH2 {
@@ -239,15 +236,13 @@ html {
   background-color: transparent;
 }
 .add-img:hover, .add-img2:hover {
-  background-color: #ED2C59;
   animation: trembling ease-in-out 400ms infinite;
   cursor: pointer;
   transform: scale(1.3);
-  background-color: rgba(255, 201, 85, 0.9);
 }
 
 .add-img2:hover {
-  background-color: white;
+  background-color: transparent;
 }
 
 .marg {
@@ -294,7 +289,6 @@ html {
 }
 .details .finishedPrio {
   animation: hoverFinished 200ms infinite;
-  background-color: #CCFFFF;
 }
 
 @keyframes hoverFinished {
@@ -302,13 +296,13 @@ html {
     box-shadow: 5px 4px, -5px -6px #FF84BC;
   }
   25% {
-    box-shadow: -5px -6px yellow, 5px 4px rgba(13, 239, 239, 0.9);
+    box-shadow: -5px -6px yellow, 5px 4px rgba(13, 239, 239, 0.5);
   }
   50% {
     box-shadow: 5px -4px yellow, -8px 4px #FF84BC;
   }
   75% {
-    box-shadow: -8px -4px yellow, -5px -4px rgba(13, 239, 239, 0.9);
+    box-shadow: -8px -4px yellow, -5px -4px rgba(13, 239, 239, 0.5);
   }
   100% {
     box-shadow: -5px 0 yellow, 5px -4px #FF84BC;
