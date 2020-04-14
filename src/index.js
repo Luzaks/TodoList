@@ -3,6 +3,7 @@ import './CSS/main.css';
 import add from './assets/add.png';
 import * as events from './events';
 import * as localStorage from './localStorage';
+import * as variables from './variables';
 
 const createClickBlock = () => {
   const clickblock = document.createElement('div');
@@ -59,16 +60,7 @@ const createMain = () => {
   const projectInfoContainer = document.createElement('section');
   projectInfoContainer.classList.add('todoItemSection', 'flex-column', 'col-xl-9', 'col-l-9', 'col-md-9', 'd-flex');
   projectInfoContainer.id = 'projectInfoContainer';
-  projectInfoContainer.innerHTML = '<br>' +'<br>' + '<br>' +' ٩(◕‿◕｡)۶  --  You can find the listed projects, and add them, in the left side of the page. ' + '<br>' +
-      '<br>' +
-      '(ﾉ◕ヮ◕)ﾉ  --  Once a project is selected, the add task icon is found in the right side of the page.' + '<br>' +
-      '<br>' +
-      'o(∗  ❛ั ᵕ ❛ั )੭່  --  Click on it and start adding tasks!!!' + '<br>' +
-      '<br>' + '(•‾⌣‾•)و ̑̑  --  ' +
-      'Remember, you can edit tasks at anytime you want.'+ '<br>' +
-      '<br>' + '(`⌒´メ)  -- And kill projects or tasks with a click on the remove button.' + '<br>'
-      +'<br>' +
-      '(๑˃ᴗ˂)ﻭ  --  Lets start!!';
+  projectInfoContainer.innerHTML = variables.welcometext;
   element.appendChild(projectInfoContainer);
 
   return element;

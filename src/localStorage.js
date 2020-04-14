@@ -1,10 +1,12 @@
-import { TodoList } from './todolist';
+/* eslint-disable no-unused-expressions */
 // eslint-disable-next-line import/no-cycle
 import * as events from './events';
+import { TodoList } from './todolist';
 import edit from './assets/icons8-edit-24.png';
 import deleteButton from './assets/icons8-delete-64.png';
 import add from './assets/add.png';
 import { TodoItem } from './todoItem';
+import * as variables from './variables';
 
 // eslint-disable-next-line import/no-mutable-exports
 export let currentProjects = [];
@@ -27,10 +29,7 @@ export const createProjectListItems = (keepOpen) => {
   const itemlist = getId('projectsContainer');
   let itemlistInfo = '';
   currentProjects.forEach(proj => {
-    itemlistInfo += `
-    <li class="projectItemContainer">
-    <div class="projectItem" id="projectItem${proj.id}">${proj.name}</div>
-    </li>`;
+    itemlistInfo += variables.itemListTXT(proj.id, proj.name);
   });
   itemlist.innerHTML = itemlistInfo;
   const projectItems = document.getElementsByClassName('projectItem');
@@ -45,20 +44,21 @@ export const createProjectListItems = (keepOpen) => {
 
 const getMessage = (prio, date) => {
   let val = '';
-  (prio === 'Finished') ? val = '' : val = `<span class="float-right marg"> This task should be done by <span class="dateTask">${date}</span></span>`;
+  (prio === 'Finished') ? val = '' : val = `<span class="float-right marg"> 
+  This task should be done by <span class="dateTask">${date}</span></span>`;
   return val;
 };
 
 const displayColors = (elemprio) => {
-  let prioDiv
-  if (elemprio === 'Normal'){
-    prioDiv = `<span class="normalPrio"></span>`;
-  }else if (elemprio === 'High'){
-    prioDiv = `<span class="highPrio"></span>`;
-  }else if (elemprio === 'Low'){
-    prioDiv = `<span class="lowPrio"></span>`;
-  }else if (elemprio === 'Finished'){
-    prioDiv = `<span class="finishedPrio"></span>`;
+  let prioDiv;
+  if (elemprio === 'Normal') {
+    prioDiv = '<span class="normalPrio"></span>';
+  } else if (elemprio === 'High') {
+    prioDiv = '<span class="highPrio"></span>';
+  } else if (elemprio === 'Low') {
+    prioDiv = '<span class="lowPrio"></span>';
+  } else if (elemprio === 'Finished') {
+    prioDiv = '<span class="finishedPrio"></span>';
   }
   return prioDiv;
 };
@@ -66,7 +66,6 @@ const displayColors = (elemprio) => {
 export const createTaskListContents = () => {
   let selectedID;
   let contentTaskInfo = '';
-  let message= '';
 
   if (events.currentProject !== null) {
     currentProjects.forEach(elem => {
@@ -76,26 +75,12 @@ export const createTaskListContents = () => {
     });
     if (selectedID.members.length > 0) {
       selectedID.members.forEach(elem => {
-        contentTaskInfo += `<div>
-            <h6>${elem.title} <img class="add-img2 deleteimgT" name="editTaskB" id="editTaskB${elem.id}" alt="add-icon" src="${edit}" /></h6>
-            <p class="details">${displayColors(elem.priority)}&nbsp;<span>Priority: </span> ${elem.priority} ${getMessage(elem.priority, elem.dueDate)}</p>
-            <medium class="descriptionTask">${elem.description}</medium>
-
-            <img class="add-img float-right deleteimg" name="deleteProjectTask" id="deleteProjectTask${elem.id}" alt="add-icon" src="${deleteButton}" />
-            <hr />
-            </div>`;
+        contentTaskInfo += variables.contetTaskinfo(elem.title, elem.id, edit,
+          displayColors(elem.priority),
+          elem.priority, getMessage(elem.priority, elem.dueDate), elem.description, deleteButton);
       });
     }
-    const contentInfo = ` 
-    <h5>${selectedID.name} <img class="add-img2 deleteimgT" id="openEditProject" alt="add-icon" src="${edit}" /> <img class="add-img deleteimgT" id="deleteProjectButton" alt="add-icon" src="${deleteButton}" /></h5>
-            
-    <div class="d-flex projectActivity justify-content-end">
-        <p class="listProjectsH2">
-            Add Task
-        </p>
-        <img class="add-img" id="addTaskButton" alt="add-icon" src="${add}" />
-    </div>
-    <hr />`;
+    const contentInfo = variables.taskListTXT(selectedID.name, edit, deleteButton, add);
     if (contentTaskInfo === '') {
       getId('projectInfoContainer').innerHTML = contentInfo + contentTaskInfo;
     } else {
@@ -113,10 +98,7 @@ export const createTaskListContents = () => {
       element.addEventListener('click', events.openEditTask.bind(this, element.id), false);
     });
   } else {
-    getId('projectInfoContainer').innerHTML = '<br>' +  '<br>'+
-        'Your daily shedule is waiting!!' +
-        '<br>' +  '<br>'+
-        '─=≡Σ((( つ＞＜)つ' + '<br>';
+    getId('projectInfoContainer').innerHTML = variables.messageEmpty;
   }
 };
 

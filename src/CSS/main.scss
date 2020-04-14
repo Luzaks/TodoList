@@ -287,25 +287,25 @@ html {
     background-color: #39ce6b;
   }
   .finishedPrio {
-    animation: hoverFinished 200ms infinite;
+    animation: hoverFinished 2000ms infinite;
   }
 }
 
 @keyframes hoverFinished {
   0% {
-    box-shadow: 5px 4px , -5px -6px #FF84BC;
+    box-shadow: 4px 3px , -4px -5px #FF84BC;
   }
   25% {
-    box-shadow: -5px -6px rgb(255, 255, 0), 5px 4px rgba(13, 239, 239, 0.5);
+    box-shadow: -4px -3px rgb(255, 255, 0), 4px 3px rgba(13, 239, 239, 0.5);
   }
   50% {
-    box-shadow: 5px -4px rgb(255, 255, 0), -8px 4px #FF84BC;
+    box-shadow: 4px -3px rgb(255, 255, 0), -7px 3px #FF84BC;
   }
   75% {
-    box-shadow: -8px -4px rgb(255, 255, 0), -5px -4px rgba(13, 239, 239, 0.5);
+    box-shadow: -7px -3px rgb(255, 255, 0), -4px -3px rgba(13, 239, 239, 0.5);
   }
   100% {
-    box-shadow: -5px 0 rgb(255, 255, 0), 5px -4px #FF84BC;
+    box-shadow: -4px -1 rgb(255, 255, 0), 4px -3px #FF84BC;
   }
 }
 
