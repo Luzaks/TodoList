@@ -45,8 +45,22 @@ export const createProjectListItems = (keepOpen) => {
 
 const getMessage = (prio, date) => {
   let val = '';
-  (prio === 'Finished') ? val = '' : val = `<span class="float-right marg"> This task should be done by ${date}</span>`;
+  (prio === 'Finished') ? val = '' : val = `<span class="float-right marg"> This task should be done by <span class="dateTask">${date}</span></span>`;
   return val;
+};
+
+const displayColors = (elemprio) => {
+  let prioDiv
+  if (elemprio === 'Normal'){
+    prioDiv = `<span class="normalPrio"></span>`;
+  }else if (elemprio === 'High'){
+    prioDiv = `<span class="highPrio"></span>`;
+  }else if (elemprio === 'Low'){
+    prioDiv = `<span class="lowPrio"></span>`;
+  }else if (elemprio === 'Finished'){
+    prioDiv = `<span class="finishedPrio"></span>`;
+  }
+  return prioDiv;
 };
 
 export const createTaskListContents = () => {
@@ -64,8 +78,8 @@ export const createTaskListContents = () => {
       selectedID.members.forEach(elem => {
         contentTaskInfo += `<div>
             <h6>${elem.title} <img class="add-img2 deleteimgT" name="editTaskB" id="editTaskB${elem.id}" alt="add-icon" src="${edit}" /></h6>
-            <p class="details"><span>Priority: </span> ${elem.priority} ${getMessage(elem.priority, elem.dueDate)}</p>
-            <small>${elem.description}</small>
+            <p class="details">${displayColors(elem.priority)}&nbsp;<span>Priority: </span> ${elem.priority} ${getMessage(elem.priority, elem.dueDate)}</p>
+            <medium class="descriptionTask">${elem.description}</medium>
 
             <img class="add-img float-right deleteimg" name="deleteProjectTask" id="deleteProjectTask${elem.id}" alt="add-icon" src="${deleteButton}" />
             <hr />
@@ -99,8 +113,10 @@ export const createTaskListContents = () => {
       element.addEventListener('click', events.openEditTask.bind(this, element.id), false);
     });
   } else {
-    getId('projectInfoContainer').innerHTML = '<br>' +  '<br>'+ '─=≡Σ((( つ＞＜)つ' + '<br>'+
-     '<br>' + 'Your daily shedule is waiting!!';
+    getId('projectInfoContainer').innerHTML = '<br>' +  '<br>'+
+        'Your daily shedule is waiting!!' +
+        '<br>' +  '<br>'+
+        '─=≡Σ((( つ＞＜)つ' + '<br>';
   }
 };
 

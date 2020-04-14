@@ -269,7 +269,48 @@ html {
 }
 
 .details{
-  font-size: 13px;
+  font-size: 0.84rem;
+  .finishedPrio,
+  .highPrio,
+  .normalPrio,
+  .lowPrio {
+    display: inline-block;
+    width: 0.84rem;
+    height: 0.84rem;
+    border-radius: 100%;
+    vertical-align: center;
+  }
+  .normalPrio {
+    background-color: #ffd81d;
+  }
+  .highPrio {
+    background-color: red;
+  }
+  .lowPrio {
+    background-color: #39ce6b;
+  }
+  .finishedPrio {
+    animation: hoverFinished 200ms infinite;
+    background-color: #CCFFFF;
+  }
+}
+
+@keyframes hoverFinished {
+  0% {
+    box-shadow: 5px 4px , -5px -6px #FF84BC;
+  }
+  25% {
+    box-shadow: -5px -6px rgb(255,255,0), 5px 4px rgba(13, 239, 239, 0.9);
+  }
+  50% {
+    box-shadow: 5px -4px rgb(255,255,0), -8px 4px #FF84BC;
+  }
+  75% {
+    box-shadow: -8px -4px rgb(255,255,0), -5px -4px rgba(13, 239, 239, 0.9);
+  }
+  100% {
+    box-shadow: -5px 0 rgb(255,255,0), 5px -4px #FF84BC;
+  }
 }
 
 .float-bt{
@@ -335,6 +376,14 @@ textarea{
   width: 309px;
   height: 100px;
   padding: 10px;
+}
+
+.descriptionTask {
+  color: grey;
+}
+
+.dateTask {
+  text-shadow: 1px -1px #CCFFFF, -1px 1px #CCCCFF;
 }
 
 input{
