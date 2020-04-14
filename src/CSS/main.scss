@@ -77,6 +77,7 @@ html {
   display: flex;
   flex-direction: column;
   background-color: rgb(252, 252, 252);
+  animation: fade_in 1s both;
 }
 
 .headerContainer {
@@ -186,6 +187,8 @@ html {
     padding-top: 2.5%;
     height: 100%;
     background-color: white;
+    font-family: 'Alta Regular', sans-serif;
+    font-size: 0.79rem;
   }
 }
 
@@ -195,6 +198,11 @@ html {
   .footerAside {
     height: 100%;
   }
+}
+
+@keyframes fade_in {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 @keyframes trembling {

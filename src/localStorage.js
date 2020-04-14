@@ -45,11 +45,7 @@ export const createProjectListItems = (keepOpen) => {
 
 const getMessage = (prio, date) => {
   let val = '';
-  if (prio === 'Finished') {
-    val = '';
-  } else {
-    val = `<span class="float-right marg"> This task should be done by ${date}</span>`;
-  }
+  (prio === 'Finished') ? val = '' : val = `<span class="float-right marg"> This task should be done by ${date}</span>`;
   return val;
 };
 
@@ -103,7 +99,8 @@ export const createTaskListContents = () => {
       element.addEventListener('click', events.openEditTask.bind(this, element.id), false);
     });
   } else {
-    getId('projectInfoContainer').innerHTML = 'Welcome! please select or create a project to start adding tasks!';
+    getId('projectInfoContainer').innerHTML = '<br>' +  '<br>'+ '─=≡Σ((( つ＞＜)つ' + '<br>'+
+     '<br>' + 'Your daily shedule is waiting!!';
   }
 };
 
