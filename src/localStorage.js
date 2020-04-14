@@ -1,13 +1,17 @@
 import { TodoList } from './todolist';
 // eslint-disable-next-line import/no-cycle
 import * as events from './events';
-import edit from './assets/edit.png';
-import deleteButton from './assets/delete.png';
+import edit from './assets/icons8-edit-24.png';
+import deleteButton from './assets/icons8-delete-64.png';
 import add from './assets/add.png';
 import { TodoItem } from './todoItem';
 
 // eslint-disable-next-line import/no-mutable-exports
 export let currentProjects = [];
+
+const getId = (elemId) => {
+  return document.getElementById(elemId);
+};
 
 // eslint-disable-next-line import/prefer-default-export
 export const initializeStorage = () => {
@@ -20,7 +24,7 @@ export const initializeStorage = () => {
 };
 
 export const createProjectListItems = (keepOpen) => {
-  const itemlist = document.getElementById('projectsContainer');
+  const itemlist = getId('projectsContainer');
   let itemlistInfo = '';
   currentProjects.forEach(proj => {
     itemlistInfo += `
@@ -83,13 +87,13 @@ export const createTaskListContents = () => {
     </div>
     <hr />`;
     if (contentTaskInfo === '') {
-      document.getElementById('projectInfoContainer').innerHTML = contentInfo + contentTaskInfo;
+      getId('projectInfoContainer').innerHTML = contentInfo + contentTaskInfo;
     } else {
-      document.getElementById('projectInfoContainer').innerHTML = contentInfo + contentTaskInfo;
+      getId('projectInfoContainer').innerHTML = contentInfo + contentTaskInfo;
     }
-    document.getElementById('deleteProjectButton').addEventListener('click', events.deleteProject.bind(this), false);
-    document.getElementById('openEditProject').addEventListener('click', events.openEditProject.bind(this), false);
-    document.getElementById('addTaskButton').addEventListener('click', events.openAddTaskWindow.bind(this), false);
+    getId('deleteProjectButton').addEventListener('click', events.deleteProject.bind(this), false);
+    getId('openEditProject').addEventListener('click', events.openEditProject.bind(this), false);
+    getId('addTaskButton').addEventListener('click', events.openAddTaskWindow.bind(this), false);
     const buttons = document.getElementsByName('deleteProjectTask');
     Array.prototype.forEach.call(buttons, (element) => {
       element.addEventListener('click', events.deleteTask.bind(this, element.id), false);
@@ -99,7 +103,7 @@ export const createTaskListContents = () => {
       element.addEventListener('click', events.openEditTask.bind(this, element.id), false);
     });
   } else {
-    document.getElementById('projectInfoContainer').innerHTML = 'Welcome! please select or create a project to start adding tasks!';
+    getId('projectInfoContainer').innerHTML = 'Welcome! please select or create a project to start adding tasks!';
   }
 };
 

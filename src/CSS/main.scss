@@ -172,9 +172,9 @@ html {
         }
         div.projectItem:hover {
           @include projectItemHover;
-          border-bottom: 1px solid rgba(255, 201, 85, 0.9);
+          border-bottom: 1px solid rgba(13, 239, 239, 0.9);
           &::after {
-            background-color: rgba(255, 201, 85, 0.9);
+            background-color: rgba(13, 239, 239, 0.9);
           }
         }
       }
@@ -244,7 +244,8 @@ html {
   margin-right: 10px;;
 }
 
-.deleteimg, .deleteimgT {
+.deleteimg,
+.deleteimgT {
   height: 20px;
   margin-left: 10px;
   margin-right: 4px;
@@ -252,6 +253,11 @@ html {
 
 .deleteimgT {
   margin-top: -5px;
+}
+
+#openEditProject,
+.add-img2 {
+  height: 17px;
 }
 
 .details{
@@ -334,8 +340,8 @@ label{
 
 .selectedItem {
   width: 87% !important;
-  border-bottom-color: rgba(13, 239, 239, 0.9) !important;
+  border-bottom-color: rgba(255, 201, 85, 0.9) !important;
   &::after {
-    background-color: rgba(13, 239, 239, 0.9) !important;
+    background-color: rgba(255, 201, 85, 0.9) !important;
   }
 }
