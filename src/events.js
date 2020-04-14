@@ -7,13 +7,9 @@ export let currentProject;
 
 let clickBlocker = '';
 
-const getElem = (elementId) => {
-  return document.getElementById(elementId)
-};
+const getElem = (elementId) => document.getElementById(elementId);
 
-const getElemValue = (elemId) => {
-  return getElem(elemId).value;
-};
+const getElemValue = (elemId) => getElem(elemId).value;
 
 const closeModals = () => {
   clickBlocker = getElem('clickBlock').classList.add('hidden');
@@ -106,7 +102,17 @@ export const openCreateProject = () => {
   getElem('actionButton').addEventListener('click', createProject.bind(this), false);
 };
 
-export const openEditTask = (id) =>{
+const confirmTaskEdit = (element, parent) => {
+  const taskTitle = getElemValue('taskName');
+  const taskDate = getElemValue('taskDate');
+  const taskPrio = getElemValue('priority');
+  const description = getElemValue('descriptionTask');
+
+  closeModals();
+  localStorage.editTask(element, parent, taskTitle, description, taskDate, taskPrio);
+};
+
+export const openEditTask = (id) => {
   let taskParent;
   let task;
   localStorage.currentProjects.forEach(elem => {
@@ -127,14 +133,4 @@ export const openEditTask = (id) =>{
   clickBlocker.innerHTML = variables.editTaskTXT(task.title, task.dueDate.toString(), task.description);
 
   getElem('editTaskButtonAction').addEventListener('click', confirmTaskEdit.bind(this, task, taskParent));
-};
-
-const confirmTaskEdit = (element, parent) => {
-  const taskTitle = getElemValue('taskName');
-  const taskDate = getElemValue('taskDate');
-  const taskPrio = getElemValue('priority');
-  const description = getElemValue('descriptionTask');
-
-  closeModals();
-  localStorage.editTask(element, parent, taskTitle, description, taskDate, taskPrio);
 };

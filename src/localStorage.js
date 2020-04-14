@@ -11,15 +11,17 @@ import * as variables from './variables';
 // eslint-disable-next-line import/no-mutable-exports
 export let currentProjects = [];
 
-const getId = (elemId) => {
-  return document.getElementById(elemId);
+const getId = (elemId) => document.getElementById(elemId);
+
+const saveData = () => {
+  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
 };
 
 // eslint-disable-next-line import/prefer-default-export
 export const initializeStorage = () => {
   if (JSON.parse(localStorage.getItem('TodoProjects')) === null) {
     currentProjects.push(new TodoList(0, 'Exaple Project', []));
-    localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+    saveData();
   } else {
     currentProjects = JSON.parse(localStorage.getItem('TodoProjects'));
   }
@@ -108,7 +110,7 @@ export const removeProject = (id) => {
       currentProjects.splice(currentProjects.indexOf(elem), 1);
     }
   });
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(false);
   createTaskListContents();
 };
@@ -121,7 +123,7 @@ export const createProject = (name) => {
     ? 0
     : Math.max(...currentProjects.map((proj) => proj.id)) + 1, name, []);
   currentProjects.push(item);
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(true);
 };
 
@@ -131,7 +133,7 @@ export const updateProject = (id, value) => {
       elem.name = value;
     }
   });
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(true);
   createTaskListContents();
 };
@@ -152,7 +154,7 @@ export const addTaskToObject = (id, title, description, dueDate, priority) => {
       elem.members.push(newTask);
     }
   });
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(true);
   createTaskListContents();
 };
@@ -167,7 +169,7 @@ export const deleteTask = (idproj, iditem) => {
       });
     }
   });
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(true);
   createTaskListContents();
 };
@@ -186,7 +188,7 @@ export const editTask = (task, parent, taskTitle, description, taskDate, taskPri
     }
   });
 
-  localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
+  saveData();
   createProjectListItems(true);
   createTaskListContents();
 };
