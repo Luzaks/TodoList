@@ -334,4 +334,8 @@ label{
 
 .selectedItem {
   width: 87% !important;
+  border-bottom-color: rgba(13, 239, 239, 0.9) !important;
+  &::after {
+    background-color: rgba(13, 239, 239, 0.9) !important;
+  }
 }

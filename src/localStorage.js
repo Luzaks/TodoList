@@ -190,4 +190,4 @@ export const editTask = (task, parent, taskTitle, description, taskDate, taskPri
   localStorage.setItem('TodoProjects', JSON.stringify(currentProjects));
   createProjectListItems(true);
   createTaskListContents();
-}
+};

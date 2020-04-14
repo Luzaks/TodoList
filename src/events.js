@@ -1,22 +1,32 @@
 // eslint-disable-next-line import/no-cycle
 import * as localStorage from './localStorage';
+import {listHome} from "../../restaurant-page/src/header";
 
 // eslint-disable-next-line import/no-mutable-exports
 export let currentProject;
 
+let clickBlocker = '';
+
+const getElem = (elementId) => {
+  return document.getElementById(elementId)
+};
+
+const getElemValue = (elemId) => {
+  return getElem(elemId).value;
+};
+
 const closeModals = () => {
-  const clickBlocker = document.getElementById('clickBlock');
-  clickBlocker.classList.add('hidden');
+  clickBlocker = getElem('clickBlock').classList.add('hidden');
 };
 
 const editProject = (element) => {
-  const val = document.getElementById('projectName');
+  const val = getElem('projectName');
   closeModals();
   localStorage.updateProject(element, val.value);
 };
 
 export const openEditProject = () => {
-  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker = getElem('clickBlock');
   let selectedID;
   clickBlocker.classList.remove('hidden');
   localStorage.currentProjects.forEach(elem => {
@@ -34,7 +44,7 @@ export const openEditProject = () => {
           </div>
     </div>
   `;
-  document.getElementById('actionButton').addEventListener('click', editProject.bind(this, selectedID.id), false);
+  getElem('actionButton').addEventListener('click', editProject.bind(this, selectedID.id), false);
 };
 
 export const selectProject = (id) => {
@@ -54,17 +64,16 @@ export const addTask = () => {
       selectedID = elem;
     }
   });
-  const name = document.getElementById('taskName').value;
-  const description = document.getElementById('descriptionTask').value;
-  const date = document.getElementById('taskDate').value;
-  const priority = document.getElementById('priority').value;
+  const name = getElemValue('taskName');
+  const description = getElemValue('descriptionTask');
+  const date = getElemValue('taskDate');
+  const priority = getElemValue('priority');
 
   closeModals();
   localStorage.addTaskToObject(selectedID, name, description, date, priority);
 };
 
 export const deleteTask = (id) => {
-  console.log(id);
   localStorage.currentProjects.forEach(elem => {
     if (`projectItem${elem.id}` === currentProject) {
       localStorage.deleteTask(elem, id);
@@ -73,7 +82,7 @@ export const deleteTask = (id) => {
 };
 
 export const openAddTaskWindow = () => {
-  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker = getElem('clickBlock');
   clickBlocker.classList.remove('hidden');
   clickBlocker.innerHTML = `
   <div class="card createTask">
@@ -95,11 +104,11 @@ export const openAddTaskWindow = () => {
   </div>
   `;
 
-  document.getElementById('createTaskButtonAction').addEventListener('click', addTask.bind(this), false);
+  getElem('createTaskButtonAction').addEventListener('click', addTask.bind(this), false);
 };
 
 export const createProject = () => {
-  const val = document.getElementById('projectName');
+  const val = getElem('projectName');
   closeModals();
   localStorage.createProject(val.value);
   val.value = '';
@@ -113,7 +122,7 @@ export const deleteProject = () => {
 
 
 export const openCreateProject = () => {
-  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker = getElem('clickBlock');
   clickBlocker.classList.remove('hidden');
 
   clickBlocker.innerHTML = `
@@ -126,7 +135,7 @@ export const openCreateProject = () => {
           </div>
     </div>
   `;
-  document.getElementById('actionButton').addEventListener('click', createProject.bind(this), false);
+  getElem('actionButton').addEventListener('click', createProject.bind(this), false);
 };
 
 export const openEditTask = (id) =>{
@@ -144,7 +153,7 @@ export const openEditTask = (id) =>{
   });
 
 
-  const clickBlocker = document.getElementById('clickBlock');
+  clickBlocker = getElem('clickBlock');
   clickBlocker.classList.remove('hidden');
   clickBlocker.innerHTML = `
   <div class="card createTask">
@@ -167,14 +176,14 @@ export const openEditTask = (id) =>{
   </div>
   `;
 
-  document.getElementById('editTaskButtonAction').addEventListener('click', confirmTaskEdit.bind(this, task, taskParent));
+  getElem('editTaskButtonAction').addEventListener('click', confirmTaskEdit.bind(this, task, taskParent));
 };
 
 const confirmTaskEdit = (element, parent) => {
-  const taskTitle = document.getElementById('taskName').value;
-  const taskDate = document.getElementById('taskDate').value;
-  const taskPrio = document.getElementById('priority').value;
-  const description = document.getElementById('descriptionTask').value;
+  const taskTitle = getElemValue('taskName');
+  const taskDate = getElemValue('taskDate');
+  const taskPrio = getElemValue('priority');
+  const description = getElemValue('descriptionTask');
 
   closeModals();
   localStorage.editTask(element, parent, taskTitle, description, taskDate, taskPrio);
